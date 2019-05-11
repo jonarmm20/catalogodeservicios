@@ -1,0 +1,29 @@
+body{
+	font-family: 'Roboto', sans-serif;
+	background-color: #DFDFDF;
+	color: #646464;
+}
+.btn-select{width: 100% }
+.select{width: 50%; text-align-last: center; padding: 10px}
+
+.menu{
+	background-color: #FFF;
+	color: #000;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  	text-align: center;
+	 }
+
+.zoom{ transition: transform .2s;  width: 150px;  height: 150px;/* Animation */}
+.zoom:hover{transform: scale(1.7);}
+.contenido{}
+
+.pagina{margin-top: 25%; margin-bottom: 25% }
+
+.footer{ opacity: 0.5 }
+.footer:hover{ opacity: 1 }
+.hidden{	display: none; }
+.info-text{
+	background-color: transparent;
+	border: none;
+  border-bottom: 2px solid red;
+}

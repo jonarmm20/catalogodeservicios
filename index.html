@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Inicio</title>
+	<link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/estilos.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/fuente.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="./assets/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="./assets/js/sweetalert2.js"></script>  
+	<script type="text/javascript" src="./assets/js/popper.min.js"></script>
+	<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+	<script type="text/javascript" src="./assets/js/main.js"></script>
+	<script type="text/javascript" src="./assets/js/configButtons.js"></script>
+</head>
+<body onload="init();">
+
+<div class="fixed-top p-2 menu">
+		
+		<a class="lead p-2 text-reset text-decoration-none " href="./index.html" >
+			Catálogo de Servicios
+		</a>
+
+		<div class="btn-group dropleft float-right">
+			<a  class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-ellipsis-v"></i>
+			</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" onclick="alta();"  >Agregar Servicios</a>
+				<a class="dropdown-item" onclick="acerca();">Acerca de mi</a>
+			</div>
+		</div>
+		<a  onclick="info()" class="btn text-dark float-right" ><i class="fas fa-info-circle"></i></a>
+</div>
+
+
+
+
+<!-- container -->
+<div class="container">
+
+	<!-- inicio pagina -->
+	<div id="inicio" class="show contenido pagina">
+		<h1 class="lead text-center">INICIO</h1>
+		<hr>
+		
+		Buscar servicio: <input class="form-control" id="myInput" type="text" placeholder="Ingresar servicio..">
+		Seleccionar Categoria<br>
+		<select id="categoria" class="btn btn-warning text-white select mt-2" onchange="displayChange();">
+	        <option value="Comida">Comida</option>
+	        <option value="Transporte">Transporte</option>
+	        <option value="Trabajo">Trabajo</option>
+	        <option value="Emergencias">Emergencias</option>
+	        <option value="Otros">Otros</option>
+		</select>	
+    <table class="table">
+      <thead>
+        <tr >
+          <th>Servicios</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <tr>
+          <td><a class="btn form-control text-secondary" href="">tacps <i class="fas fa-external-link-alt"></i></a></td>    
+        </tr>
+      </tbody>
+    </table> 
+
+	</div><!-- fin inicio pagina -->
+
+
+
+	<!-- alta pagina -->
+	<div id="alta" class="hidden contenido pagina">
+		<h1 class="lead text-center">Agregar Servicios</h1>
+		<hr>
+	      Nombre
+	      <input type="text"  id="serNombre" class="limpiar form-control">	     
+	      Telefono
+	      <input type="text"  id="serTelefono" class="limpiar form-control">
+	      E-mail
+	      <input type="email" id="serEmail" class="limpiar form-control">
+	      Direccion
+	      <textarea  id="serDomicilio" class="limpiar form-control"></textarea>
+	      Categorias
+	      <select  id="serCategoria" class="form-control">
+	        <option value="Comida">Comida</option>
+	        <option value="Transporte"> Transporte</option>
+	        <option value="Trabajo">Trabajo</option>
+	        <option value="Emergencias"> Emergencias</option>
+	        <option value="Otros">Otros</option>
+	      </select>
+	      Nota
+	      <textarea  id="serNota" class="limpiar form-control"></textarea>
+	      <br>
+     	  <input type="button" class="btn btn-success btn-lg form-control" value="Agregar" onclick="add();">  
+	</div><!-- fin alta pagina -->
+
+	<!-- editar pagina -->
+	<div id="editar" class="hidden contenido pagina">
+
+		<h1 class="lead text-center">Editar Servicios</h1>
+		<hr>
+		  <input type="text" id="eId" class="limpiar form-control" hidden="" disabled="">
+	      Nombre
+	      <input type="text"  id="eNombre" class="limpiar form-control">	      
+	      Telefono
+	      <input type="text"  id="eTelefono" class="limpiar form-control">
+	      E-mail
+	      <input type="email" id="eEmail" class="limpiar form-control">
+	      Direccion
+	      <textarea  id="eDomicilio" class="limpiar form-control"></textarea>
+	      Categorias
+	      <select  id="eCategoria" class="form-control">
+	        <option value="Comida">Comida</option>
+	        <option value="Transporte">Transporte</option>
+	        <option value="Trabajo">Trabajo</option>
+	        <option value="Emergencias">Emergencias</option>
+	        <option value="Otros">Otros</option>
+	      </select>
+	      Nota
+	      <textarea  id="eNota" class="limpiar form-control"></textarea>
+	      <br>
+
+     	  <div id="options"></div> 
+	</div><!-- fin editar pagina -->
+
+	<div id="mostrar" class="hidden contenido pagina">
+		
+		<h1 class="lead text-center">Servicio</h1>
+		<hr>
+		<div id="text-mostrar"></div>
+	</div><!-- fin acerca pagina -->
+
+	<div id="acerca" class="hidden contenido pagina">
+			<div class="row">
+				<div class=" m-auto pr-3 pl-3">
+					<h1 class="lead text-center">Acerca de mi</h1>
+					<hr>
+					<div class="d-flex justify-content-center mb-3">
+						<img  src="./assets/images/profile.jpg" class="rounded-circle zoom">
+					</div>
+					<strong>Nombre: </strong> Jonathan Raymundo Magallanes Martinez
+					<hr>
+					<strong>Carrera: </strong> Lic. en Ingenieria en Sistema de Informacion
+					<hr>
+					<strong>Materia: </strong> Desarrollo de Aplicaciones para Comercio Electrónico
+					<hr>
+			        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			        <input type="hidden" name="cmd" value="_s-xclick" />
+			        <input type="hidden" name="hosted_button_id" value="W8UZEE2QPNKKQ" />
+			        <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donar con el botón PayPal" />
+			        <img alt="" border="0" src="https://www.paypal.com/es_MX/i/scr/pixel.gif" width="1" height="1" />
+			        </form>
+				</div>				
+			</div>	
+	</div><!-- fin acerca pagina -->
+
+</div><!-- fin container -->
+
+<div class="fixed-bottom bg-dark  footer row">
+  <a href="./index.html" class="btn text-white btn-lg col" >
+    <i class="fas fa-home"></i> Inicio
+  </a>
+</div>
+
+
+</body>
+</html>
