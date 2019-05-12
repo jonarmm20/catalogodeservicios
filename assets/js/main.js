@@ -154,7 +154,7 @@ $(document).ready(function(){
 					document.getElementById('nombre').value = perfil.nombre;
 					document.getElementById('apellido').value = perfil.apellido;
 					document.getElementById('sexo').value = perfil.sexo;
-					s = '<input onclick="updateProfile('+perfil.ID+');" class="btn btn-info btn-lg form-control" value="Actualizar"> ';			
+					s = '<input type="button" onclick="updateProfile('+perfil.ID+');" class="btn btn-info btn-lg form-control" value="Actualizar"> ';			
 
 					document.getElementById('op').innerHTML = s;
 
