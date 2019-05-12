@@ -14,18 +14,33 @@ $(document).ready(function(){
 		db.transaction(function (tx){
 			tx.executeSql('CREATE TABLE IF NOT EXISTS servers(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre TEXT, imagen TEXT, telefono TEXT, email TEXT, domicilio TEXT, categoria TEXT, nota TEXT)');
 		});
-		//profile();
+		profile();
 		displayChange();
-		//checkProfile();
+		checkProfile();
 	}
 
 
 	function profile(){
 		db.transaction(function (tx){
-			tx.executeSql('CREATE TABLE IF NOT EXISTS perfil(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre TEXT, apellido TEXT, sexo TEXT, edad integer)');
+			tx.executeSql('CREATE TABLE IF NOT EXISTS perfil(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre TEXT, apellido TEXT, sexo TEXT, ruta TEXT)');
 		});
 
 		//displayAll();
+	}
+
+	function showAltaProfile(){
+		db.transaction(function (tx){
+			tx.executeSql('select * from perfil', [], function(tx, result){
+				var n = result.rows.length;
+				if (n == 0) {
+					$('#btnalta').addClass('show');
+					$('#btnalta').removeClass('hidden');
+				}else{
+					getPerfil();
+				}
+			});
+		});
+		
 	}
 
 	function checkProfile(){
@@ -49,35 +64,28 @@ $(document).ready(function(){
 					}).then((result) => {
 					  if (result.value) {
 					    window.location.href="perfil.html";
+
 					  }
 					});
 
 				}else{
-					alert('existe un perfil');
+					displayPerfil();
 				}
 			});
 		});
+
 	}
 
-	function displayAll(){
+	function displayPerfil(){
 		db.transaction(function (tx){
-			tx.executeSql('select * from servers ', [], function(tx, result){
-
-				var n = result.rows.length;
-				var s = '<table cellpadding="2" cellspacing="2" border="1" class="form-control">';	
-				for(i = 0; i < n; i++){
-					var servicio = result.rows.item(i);
-					s += '<tr>';
-					s += '<td ><p class="truncate">' + servicio.nombre +'</p></td>';
-					s += '<td>' + servicio.categoria +'</td>';
-					s += '<td><a href="#" class="btn btn-success float-right form-control"onclick="edit('+servicio.ID+')">Edit</a> </td>';
-					s += '</tr>';
-				}
-
-				s += '</table>';
-				document.getElementById('myTable').innerHTML = s;
+			tx.executeSql('select * from perfil where id = 1', [], function(tx, result){
+				var perfil = result.rows.item(0);
+				var s = '<div class="col">';	
+				 s += '<img src="'+ perfil.ruta +'" class="float-left"  width="100px" height="100px"></div>';	
+				 s += '<div class="col mt-2">';	
+				 s += '<p class="text-right">'+ perfil.nombre +' '+ perfil.apellido+' <a href="./perfil.html">Cambiar</a></p></div>';	
+						document.getElementById('profile').innerHTML = s;
 			});
-
 		});
 	}
 
@@ -138,8 +146,103 @@ $(document).ready(function(){
 
 		});
 	}
+	function getPerfil(){
+			db.transaction(function (tx){
+				tx.executeSql('select * from perfil where id = 1', [], function(tx, result){
+					var perfil = result.rows.item(0);
+
+					document.getElementById('nombre').value = perfil.nombre;
+					document.getElementById('apellido').value = perfil.apellido;
+					document.getElementById('sexo').value = perfil.sexo;
+					s = '<input onclick="updateProfile('+perfil.ID+');" class="btn btn-info btn-lg form-control" value="Actualizar"> ';			
+
+					document.getElementById('op').innerHTML = s;
+
+				});
+			});
+	}
+	function addProfile(){
+		db.transaction(function (tx){
+			var nombre = document.getElementById('nombre').value;
+			var apellido = document.getElementById('apellido').value;
+			var sexo = document.getElementById('sexo').value;
+			if (sexo == "Hombre") {
+				ruta = "./assets/images/hombre2.png";
+			}else{
+				ruta = "./assets/images/mujer3.png";
+			}
+
+			var v = validar_perfil();
+			if (v) {
+			tx.executeSql('insert into perfil(nombre, apellido, sexo, ruta) values (?, ?, ?, ?)', [nombre, apellido, sexo, ruta], mensajeProfile());
+			}else{
+				Swal.fire({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'Problemas al completar su perfil.',
+				  footer: '*Debe llenar todos los campos.'
+				});
+			}
+		});
+	}
+
+	function updateProfile(id){
+		var nombre = document.getElementById('nombre').value;
+		var apellido = document.getElementById('apellido').value;
+		var sexo = document.getElementById('sexo').value;
+		var ruta;
+		if (sexo == "Hombre") {
+			ruta = "./assets/images/hombre2.png";
+		}else{
+			ruta = "./assets/images/mujer3.png";
+		}
+		db.transaction(function (tx){
+			var v = validar_perfil();
+			if (v) {
+			tx.executeSql('update perfil set  nombre = ?, apellido = ?, sexo = ?, ruta = ? where id = ?', [nombre, apellido, sexo, ruta, id], mensajeProfile());
+			alert(id+nombre+apellido+sexo+ruta);
+			}else{
+				Swal.fire({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'Problemas al completar su perfil.',
+				  footer: '*Debe llenar todos los campos.'
+				});
+			}
+		});
+	}
 
 
+	function validar_perfil(){
+			var nombre = document.getElementById('nombre').value;
+			var apellido = document.getElementById('apellido').value;
+			var sexo = document.getElementById('sexo').value;
+			if ( nombre == "" || apellido == "" || sexo == "" ) {
+				return false;
+			}else{
+				return true;
+			}
+
+	}
+
+	function mensajeProfile(){
+		Swal.fire({
+		  title: 'Agregado',
+		  text: "Se agrego con exito.",
+		  type: 'success',
+		  confirmButtonColor: '#3085d6',
+		  confirmButtonText: 'OK',
+		  animation: false,
+			  customClass: {
+			  	popup: 'animated flip'
+		  }
+		}).then((result) => {
+		  if (result.value) {
+		  	limpiar();
+		   	window.location.href = "./index.html";
+		  }
+		})
+	}
 
 
 	function add(){
@@ -341,12 +444,16 @@ $(document).ready(function(){
 		  }
 		})
 	}
-	function limpiar(){
-		$('.limpiar').val('');
-	}
+
+
 	function donar(){
 		window.location.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2NLE7A79943EG&source=url";
 	}
+
+	function limpiar(){
+		$('.limpiar').val('');
+	}
+
 
 
 
