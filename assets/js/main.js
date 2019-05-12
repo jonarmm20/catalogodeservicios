@@ -200,7 +200,7 @@ $(document).ready(function(){
 			var v = validar_perfil();
 			if (v) {
 			tx.executeSql('update perfil set  nombre = ?, apellido = ?, sexo = ?, ruta = ? where id = ?', [nombre, apellido, sexo, ruta, id], mensajeProfile());
-			alert(id+nombre+apellido+sexo+ruta);
+			
 			}else{
 				Swal.fire({
 				  type: 'error',
