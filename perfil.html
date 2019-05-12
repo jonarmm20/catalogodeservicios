@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Inicio</title>
+	<link href="./assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/animate.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/estilos.css" rel="stylesheet" type="text/css">
+	<link href="./assets/css/fuente.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="./assets/css/all.css">
+
+	<script type="text/javascript" src="./assets/js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="./assets/js/sweetalert2.js"></script>  
+	<script type="text/javascript" src="./assets/js/popper.min.js"></script>
+	<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./assets/js/main.js"></script>
+	<script type="text/javascript" src="./assets/js/configButtons.js"></script>
+
+</head>
+<body onload="showAltaProfile();">
+
+<div class="fixed-top p-2 menu">
+		
+		<a class="lead p-2 text-reset text-decoration-none " href="./index.html" >
+			Catálogo de Servicios
+		</a>
+
+		<div class="btn-group dropleft float-right">
+			<a  class="btn " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-ellipsis-v"></i>
+			</a>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" onclick="alta();"  >Agregar Servicios</a>
+				<a class="dropdown-item" onclick="acerca();">Acerca de mi</a>
+			</div>
+		</div>
+		<a  onclick="info()" class="btn text-dark float-right" ><i class="fas fa-info-circle"></i></a>
+</div>
+
+
+<!-- container -->
+<div class="container">
+
+
+
+	<!-- alta pagina -->
+	<div id="altaprofile" class="contenido pagina">
+		
+		<h1 class="lead text-center">Completar Perfil</h1>
+		<hr>
+
+	      Nombre
+	      <input type="text"  id="nombre" class="limpiar form-control">
+	      Apellido
+	      <input type="text"  id="apellido"  class="limpiar form-control">
+	      
+	      Sexo
+	      <select  id="sexo"  class="form-control">
+	        <option value="Hombre">Hombre</option>
+	        <option value="Mujer">Mujer</option>
+	      </select>
+	      <br>
+     	  <input id="btnalta" onclick="addProfile();" class="hidden btn btn-success btn-lg form-control" value="Completar"> 
+		 <div id="op"></div>
+     	
+	</div><!-- fin alta pagina -->
+
+</div><!-- fin container -->
+
+<div class="fixed-bottom bg-dark  footer row">
+  <a href="./index.html" class="btn text-white btn-lg col" >
+    <i class="fas fa-home"></i> Inicio
+  </a>
+</div>
+
+
+</body>
+</html>
