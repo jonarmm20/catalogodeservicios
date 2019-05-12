@@ -167,7 +167,17 @@ $(document).ready(function(){
 					break;
 			}
 			var nota = document.getElementById('serNota').value;
+			var v = validar_insert();
+			if (v) {
 			tx.executeSql('insert into servers(nombre, imagen, telefono, email, domicilio, categoria, nota) values (?, ?, ?, ?, ?, ?, ?)', [nombre, imagen, telefono, email, domicilio, categoria, nota], mensajeAdd());
+			}else{
+				Swal.fire({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'Debe llenar todos los campo',
+				  footer: '*solo el campo nota es opcional.'
+				});
+			}
 		});
 	}
 	function mensajeAdd(){
@@ -299,7 +309,17 @@ $(document).ready(function(){
 					var imagen = 'far fa-sticky-note';
 					break;
 			}
-			tx.executeSql('update servers set nombre = ?, imagen = ?, telefono = ?, email = ?, domicilio = ?, categoria = ?, nota = ? where ID = ?', [nombre, imagen, telefono, email, domicilio, categoria, nota, id], mensajeUpdate());
+			var v = validar_edit();
+			if (v) {
+				tx.executeSql('update servers set nombre = ?, imagen = ?, telefono = ?, email = ?, domicilio = ?, categoria = ?, nota = ? where ID = ?', [nombre, imagen, telefono, email, domicilio, categoria, nota, id], mensajeUpdate());
+			}else{
+				Swal.fire({
+				  type: 'error',
+				  title: 'Oops...',
+				  text: 'Debe llenar todos los campo',
+				  footer: '*solo el campo nota es opcional.'
+				});
+			}
 		});
 	}
 
@@ -342,4 +362,30 @@ $(document).ready(function(){
 			'<i class="fa fa-thumbs-up"></i> Muy bien!',
 			confirmButtonAriaLabel: 'Thumbs up, great!',
 		})
+	}
+
+	function validar_edit(){
+			var nombre = document.getElementById('eNombre').value;
+			var telefono = document.getElementById('eTelefono').value;
+			var email = document.getElementById('eEmail').value;
+			var domicilio = document.getElementById('eDomicilio').value;
+
+			if (nombre == "" || telefono == "" || email == "" || domicilio == "") {
+				return false;
+			}else{
+				return true;
+			}
+	}
+
+	function validar_insert(){
+			var nombre = document.getElementById('serNombre').value;
+			var telefono = document.getElementById('serTelefono').value;
+			var email = document.getElementById('serEmail').value;
+			var domicilio = document.getElementById('serDomicilio').value;
+			if (nombre == "" || telefono == "" || email == "" || domicilio == "") {
+				return false;
+			}else{
+				return true;
+			}
+
 	}
