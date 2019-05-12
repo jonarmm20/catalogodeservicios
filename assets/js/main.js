@@ -14,9 +14,9 @@ $(document).ready(function(){
 		db.transaction(function (tx){
 			tx.executeSql('CREATE TABLE IF NOT EXISTS servers(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nombre TEXT, imagen TEXT, telefono TEXT, email TEXT, domicilio TEXT, categoria TEXT, nota TEXT)');
 		});
-		profile();
+		//profile();
 		displayChange();
-		checkProfile();
+		//checkProfile();
 	}
 
 
@@ -80,6 +80,7 @@ $(document).ready(function(){
 
 		});
 	}
+
 	function displayChange(){
 		var id = document.getElementById('categoria').value;
 		db.transaction(function (tx){
@@ -91,7 +92,7 @@ $(document).ready(function(){
 				if (n > 0) {					
 					for(i = 0; i < n; i++){
 						var servicio = result.rows.item(i);
-						s += '<tr><td>';
+						s += '<tr ><td>';
 						s += '<button onclick="displaySelect('+servicio.ID+');"class="btn btn-light p-3  btn-select">';
 						s += '<strong><i class="'+servicio.imagen+'"></i></strong> ' + servicio.nombre +' | ';
 						s += '<strong><i class="fas fa-phone"></i></strong> 6691 89 14 18';
