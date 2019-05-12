@@ -344,7 +344,9 @@ $(document).ready(function(){
 	function limpiar(){
 		$('.limpiar').val('');
 	}
-
+	function donar(){
+		window.location.href = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2NLE7A79943EG&source=url";
+	}
 
 
 
