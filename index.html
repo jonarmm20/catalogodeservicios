@@ -44,12 +44,14 @@
 
 	<!-- inicio pagina -->
 	<div id="inicio" class="show contenido pagina">
+		<div id="profile" class="row">			
+		</div>
 		<h1 class="lead text-center">INICIO</h1>
 		<hr>
 		
 		Buscar servicio: <input class="form-control" id="myInput" type="text" placeholder="Ingresar servicio..">
 		Seleccionar Categoria<br>
-		<select id="categoria" class="btn btn-warning text-white form-control mt-2" onchange="displayChange();">
+		<select id="categoria" class="btn btn-warning text-white  mt-2  form-control" onchange="displayChange();">
 	        <option value="Comida">Comida</option>
 	        <option value="Transporte">Transporte</option>
 	        <option value="Trabajo">Trabajo</option>
@@ -112,7 +114,7 @@
 	      Nombre
 	      <input type="text"  id="eNombre" class="limpiar form-control">	      
 	      Telefono
-	      <input type="number"  id="eTelefono" class="limpiar form-control">
+	      <input type="text"  id="eTelefono" class="limpiar form-control">
 	      E-mail
 	      <input type="email" id="eEmail" class="limpiar form-control">
 	      Direccion
@@ -157,11 +159,11 @@
 					<hr>
 					<strong>Materia: </strong> Desarrollo de Aplicaciones para Comercio Electrónico
 					<hr>
-				
-				<button class="" style="width: 100%; height: 50px; background-image: url('./assets/images/donate.es.png'); background-size: 100% 100%" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2NLE7A79943EG&source=url', '_system'); return false;"></button>
-				
+			        <button class="" style="width: 100%; height: 50px; background-image: url('./assets/images/donate.es.png'); background-size: 100% 100%" onclick="window.open('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2NLE7A79943EG&source=url', '_system'); return false;"></button>
 				</div>				
 			</div>	
+			
+
 	</div><!-- fin acerca pagina -->
 
 </div><!-- fin container -->
